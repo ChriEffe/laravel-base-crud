@@ -42,12 +42,9 @@ class ComicController extends Controller
     public function store(Request $request)
     {
         $dataArray = $request->all();
-        $comic->title = $dataArray['title'];
-        $comic->author = $dataArray['author'];
-        $comic->genre = $dataArray['genre'];
-        $comic->price = $dataArray['price'];
-        $comic->description = $dataArray['description'];
-        $comic->photo = $dataArray['photo'];
+        $comic = new Comic();
+        $comic->fill($dataArray);
+        $comic->save();
 
         $save = $comic->save();
         if (!$save) {
@@ -65,7 +62,12 @@ class ComicController extends Controller
      */
     public function show(Comic $comic)
     {
-        //
+        $data = [
+            'comic' => $comic,
+            'title' => $comic->title
+        ];
+
+        return view('comics.show', $data);
     }
 
     /**
