@@ -17,9 +17,10 @@ class CreateComicsTable extends Migration
             $table->id();
             $table->string('title', 50);
             $table->string('author', 50);
+            $table->string('genre',50);
             $table->float('price');
-            $table->string('description', 250);
-            $table->string('photo', 50);
+            $table->text('description')->nullable();
+            $table->string('photo', 250)->nullable();
             $table->timestamps();
         });
     }

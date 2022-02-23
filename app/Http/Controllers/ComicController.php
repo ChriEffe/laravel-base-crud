@@ -14,7 +14,13 @@ class ComicController extends Controller
      */
     public function index()
     {
-        //
+        $comics = Comic::paginate(25);
+        $data = [
+            'comics' => $comics,
+            'title' => 'Comics Home'
+        ];
+
+        return view('comics.index', $data);
     }
 
     /**
@@ -24,7 +30,7 @@ class ComicController extends Controller
      */
     public function create()
     {
-        //
+        return view('comics.create', ['title' => 'Create New Comics']);
     }
 
     /**
@@ -35,7 +41,20 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dataArray = $request->all();
+        $comic->title = $dataArray['title'];
+        $comic->author = $dataArray['author'];
+        $comic->genre = $dataArray['genre'];
+        $comic->price = $dataArray['price'];
+        $comic->description = $dataArray['description'];
+        $comic->photo = $dataArray['photo'];
+
+        $save = $comic->save();
+        if (!$save) {
+            dd('Salvataggio non riuscito');
+        }
+
+        return redirect()->route('comics.show', $comic->id);
     }
 
     /**
