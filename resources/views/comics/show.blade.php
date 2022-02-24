@@ -1,7 +1,7 @@
 @extends('layout.base')
 
 @section('documentTitle')
-    {{ $title }}
+    {{ $comic->title }}
 @endsection
 
 @section('content')
@@ -16,7 +16,7 @@
                 <img class="fluid-img" src=" {{$comic->photo }}" alt="{{$comic->title}}">
             </div>
             <div class="col">
-                <div>{{ $comic->Author }}</div>
+                <div>{{ $comic->author }}</div>
                 <div><h2>{{  $comic->price }} €</h2></div>
             </div>
         </div>
